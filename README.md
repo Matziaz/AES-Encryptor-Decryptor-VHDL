@@ -10,6 +10,21 @@ Este proyecto implementa un sistema de **encriptación** y **desencriptación** 
 - Modular y escalable, diseñado para implementaciones en hardware mediante FPGA.
 - Compatible con Questa para simulación y Quartus para síntesis e implementación.
 
+## Acerca del Algoritmo AES
+
+El **AES (Advanced Encryption Standard)** es un algoritmo de cifrado simétrico adoptado como estándar por el gobierno estadounidense (FIPS 197). Sus características principales son:
+
+- **Cifrado por bloques**: Procesa datos en bloques de 128 bits.
+- **Claves de variable**: Soporta longitudes de 128, 192 o 256 bits.
+- **Rondas de procesamiento**: Realiza 10, 12 o 14 rondas según la longitud de la clave.
+- **Operaciones principales**:
+  - **SubBytes**: Sustitución no lineal de bytes.
+  - **ShiftRows**: Desplazamiento de filas en la matriz de estado.
+  - **MixColumns**: Mezcla de columnas para difusión.
+  - **AddRoundKey**: Combinación con la clave de ronda.
+
+Este proyecto implementa estas operaciones tanto para el proceso de encriptación como para su inversa (desencriptación), permitiendo cifrar y descifrar datos de forma segura en hardware.
+
 ## Estructura del Proyecto
 
 El proyecto está organizado en los siguientes módulos VHDL:
@@ -39,54 +54,42 @@ Incluye los componentes para realizar el descifrado:
 ## Requisitos
 
 Para trabajar con este proyecto, necesitarás:
-- **Questa**: Para simulación y verificación de los componentes VHDL.
-- **Quartus Prime**: Para síntesis e implementación del diseño en FPGA.
+- **Questa Advanced Simulator**: Para simulación y verificación de los componentes VHDL.
+- **Intel Quartus Prime** (v22.1 o superior): Para síntesis e implementación del diseño en FPGA.
 - Conocimientos básicos de diseño digital y del algoritmo AES.
 - FPGA compatible con Quartus para la implementación en hardware.
 
-## Configuración del Entorno
+## Configuración Inicial
 
-### Configuración de Questa
+### Para Questa
+- Instala Questa Advanced Simulator.
+- Verifica compatibilidad con los archivos VHDL del proyecto.
+- Crea un nuevo proyecto e importa todos los archivos `.vhd`.
 
-1. **Instalación**:
-   - Asegúrate de tener instalado Questa Advanced Simulator.
-   - Verifica que la versión sea compatible con los archivos VHDL del proyecto.
-
-2. **Creación del Proyecto**:
-   - Abre Questa y crea un nuevo proyecto.
-   - Añade todos los archivos `.vhd` del proyecto.
-   - Define la jerarquía del diseño según la estructura del proyecto.
-
-### Configuración de Quartus
-
-1. **Instalación**:
-   - Instala Intel Quartus Prime (versión recomendada: 22.1 o superior).
-   - Asegúrate de incluir el soporte para tu familia de FPGA específica.
-
-2. **Creación del Proyecto**:
-   - Crea un nuevo proyecto en Quartus.
-   - Añade todos los archivos `.vhd` del proyecto.
-   - Especifica el dispositivo FPGA que utilizarás.
-   - Configura las asignaciones de pines según tu placa de desarrollo.
+### Para Quartus
+- Instala Intel Quartus Prime (v22.1 o superior).
+- Incluye soporte para tu familia de FPGA específica.
+- Crea un nuevo proyecto e importa todos los archivos `.vhd`.
+- Configura el dispositivo FPGA y las asignaciones de pines según tu placa de desarrollo.
 
 ## Flujo de Trabajo
 
 ### Simulación con Questa
 
 1. **Compilación**:
-   ```
+   ```bash
    vcom -work work *.vhd
    ```
 
 2. **Simulación**:
    - Crea un testbench para cada módulo o para el sistema completo.
    - Ejecuta la simulación:
-   ```
+   ```bash
    vsim -t ns work.testbench
    ```
    - Añade señales al visor de ondas para analizar el comportamiento.
    - Ejecuta la simulación para el tiempo deseado:
-   ```
+   ```bash
    run 1000 ns
    ```
 
@@ -135,8 +138,6 @@ Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para má
 
 ## Créditos
 
-Desarrollado como parte del curso **TE2002B**. Todos los derechos reservados.
+Desarrollado como parte del curso **TE2002B**.
 
 ---
-
-¡Gracias por usar este proyecto!
